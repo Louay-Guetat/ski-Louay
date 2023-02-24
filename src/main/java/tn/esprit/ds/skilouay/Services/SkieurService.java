@@ -2,8 +2,10 @@ package tn.esprit.ds.skilouay.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.esprit.ds.skilouay.Entities.Abonnement;
 import tn.esprit.ds.skilouay.Entities.Piste;
 import tn.esprit.ds.skilouay.Entities.Skieur;
+import tn.esprit.ds.skilouay.Repositories.AbonnementRepository;
 import tn.esprit.ds.skilouay.Repositories.PisteRepository;
 import tn.esprit.ds.skilouay.Repositories.SkieurRepository;
 
@@ -15,6 +17,8 @@ public class SkieurService implements ISkieurService{
     SkieurRepository skieurRepository;
     @Autowired
     PisteRepository pisteRepository;
+    @Autowired
+    AbonnementRepository abonnementRepository;
     @Override
     public List<Skieur> retrieveAllSkieurs() {
         return skieurRepository.findAll();
@@ -57,5 +61,17 @@ public class SkieurService implements ISkieurService{
         }
         return skieurRepository.findById(numSkieur).orElse(null);
     }
+
+    @Override
+    public Skieur AssignSkierToSubscription(long numSkieur, long numAbon) {
+        Skieur skieur = skieurRepository.findById(numSkieur).orElse(null);
+        Abonnement abonnement = abonnementRepository.findById(numAbon).orElse(null);
+        if(skieur != null && abonnement != null){
+            skieur.setAbonnement(abonnement);
+            skieurRepository.save(skieur);
+        }
+        return null;
+    }
+
 
 }

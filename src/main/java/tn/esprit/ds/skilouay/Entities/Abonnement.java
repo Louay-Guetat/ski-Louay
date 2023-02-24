@@ -1,14 +1,19 @@
 package tn.esprit.ds.skilouay.Entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-enum TypeAbonnement{
-    ANNUEL,SEMESTRIEL,MENSUEL
-}
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Abonnement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

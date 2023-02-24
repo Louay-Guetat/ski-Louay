@@ -2,14 +2,6 @@ package tn.esprit.ds.skilouay.Entities;
 
 import javax.persistence.*;
 import java.util.List;
-
-enum TypeCours{
-    COLLECTIF_ENFANT,COLLECTIF_PARENT,PARTICULIER
-}
-
-enum Support{
-    SKI,SNOWBOARD
-}
 @Entity
 public class Cours {
     @Id
