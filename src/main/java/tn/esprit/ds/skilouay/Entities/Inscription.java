@@ -1,5 +1,7 @@
 package tn.esprit.ds.skilouay.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,5 +13,6 @@ public class Inscription {
     @ManyToOne
     private Cours cour;
     @ManyToOne()
+    @JsonIgnore
     private Skieur skieur;
 }

@@ -1,5 +1,6 @@
 package tn.esprit.ds.skilouay.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class Skieur {
     private LocalDate dateNaissance;
     private String ville;
     @ManyToMany(mappedBy = "skieurs")
+    @JsonIgnore
     private List<Piste> pistes;
     @OneToOne(cascade = CascadeType.REMOVE)
     private Abonnement abonnement;
