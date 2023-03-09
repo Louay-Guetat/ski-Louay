@@ -2,9 +2,11 @@ package tn.esprit.ds.skilouay.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import tn.esprit.ds.skilouay.Entities.Abonnement;
 import tn.esprit.ds.skilouay.Entities.Piste;
 import tn.esprit.ds.skilouay.Entities.Skieur;
+import tn.esprit.ds.skilouay.Entities.TypeAbonnement;
 import tn.esprit.ds.skilouay.Repositories.AbonnementRepository;
 import tn.esprit.ds.skilouay.Repositories.PisteRepository;
 import tn.esprit.ds.skilouay.Repositories.SkieurRepository;
@@ -47,31 +49,33 @@ public class SkieurService implements ISkieurService{
     public Skieur assignSkierToPiste(Long numSkieur, Long numPiste) {
         //Recuperation des objets
         Skieur skieur = skieurRepository.findById(numSkieur).orElse(null);
+        Assert.notNull(skieur,"Skieur must be not null");
         Piste piste = pisteRepository.findById(numPiste).orElse(null);
+        Assert.notNull(piste,"Piste must be not null");
         //verification non null
-        if(skieur != null && piste != null){
-            //Traitement
-            piste.getSkieurs().add(skieur);
-            /*List<Piste> pistes = skieur.getPistes();
-            pistes.add(piste);
-            skieur.setPistes(pistes);*/
-
-            //save
-            pisteRepository.save(piste);
-        }
+        //Traitement
+        piste.getSkieurs().add(skieur);
+        /*List<Piste> pistes = skieur.getPistes();
+        pistes.add(piste);
+        skieur.setPistes(pistes);*/
+        //save
+        pisteRepository.save(piste);
         return skieurRepository.findById(numSkieur).orElse(null);
     }
 
     @Override
     public Skieur AssignSkierToSubscription(long numSkieur, long numAbon) {
         Skieur skieur = skieurRepository.findById(numSkieur).orElse(null);
+        Assert.notNull(skieur,"Skieur must be not null");
         Abonnement abonnement = abonnementRepository.findById(numAbon).orElse(null);
-        if(skieur != null && abonnement != null){
-            skieur.setAbonnement(abonnement);
-            skieurRepository.save(skieur);
-        }
-        return null;
+        Assert.notNull(abonnement,"Abonnement must be not null");
+        skieur.setAbonnement(abonnement);
+        return skieurRepository.save(skieur);
     }
 
+    @Override
+    public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement) {
+        return skieurRepository.findByAbonnement_TypeAbon(typeAbonnement);
+    }
 
 }

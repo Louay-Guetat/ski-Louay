@@ -1,6 +1,7 @@
 package tn.esprit.ds.skilouay.Services;
 
 import tn.esprit.ds.skilouay.Entities.Skieur;
+import tn.esprit.ds.skilouay.Entities.TypeAbonnement;
 
 import java.util.List;
 
@@ -12,4 +13,5 @@ public interface ISkieurService{
     Skieur updateSkieur(Skieur skieur);
     Skieur assignSkierToPiste(Long numSkieur, Long numPiste);
     Skieur AssignSkierToSubscription(long numSkieur, long numAbon);
+    List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement);
 }

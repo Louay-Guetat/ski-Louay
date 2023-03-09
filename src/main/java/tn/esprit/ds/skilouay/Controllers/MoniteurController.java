@@ -3,6 +3,7 @@ package tn.esprit.ds.skilouay.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.ds.skilouay.Entities.Moniteur;
+import tn.esprit.ds.skilouay.Entities.Skieur;
 import tn.esprit.ds.skilouay.Services.IMoniteurService;
 
 import java.util.List;
@@ -30,5 +31,9 @@ public class MoniteurController {
     @DeleteMapping("/{id}")
     public void removeMoniteur (@PathVariable(name = "id") Long numMoniteur){
         moniteurService.removeMoniteur(numMoniteur);
+    }
+    @PostMapping("/{numCours}")
+    public Moniteur addInstructorAndAssignToCourse(@RequestBody Moniteur moniteur, @PathVariable Long numCours){
+        return moniteurService.addInstructorAndAssignToCourse(moniteur,numCours);
     }
 }

@@ -3,9 +3,12 @@ package tn.esprit.ds.skilouay.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.ds.skilouay.Entities.Abonnement;
+import tn.esprit.ds.skilouay.Entities.TypeAbonnement;
 import tn.esprit.ds.skilouay.Repositories.AbonnementRepository;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AbonnementService implements IAbonnementService{
@@ -33,5 +36,15 @@ public class AbonnementService implements IAbonnementService{
     @Override
     public Abonnement updateAbonnement(Abonnement abonnement){
         return abonnementRepository.save(abonnement);
+    }
+
+    @Override
+    public Set<Abonnement> getSubscriptionByType(TypeAbonnement typeAbonnement) {
+        return abonnementRepository.findByTypeAbonOrderByDateDebut(typeAbonnement);
+    }
+
+    @Override
+    public List<Abonnement> retreiveSubscriptionsByDates(LocalDate startDate, LocalDate endDate) {
+        return abonnementRepository.findByDateDebutAndDateFin(startDate,endDate);
     }
 }
