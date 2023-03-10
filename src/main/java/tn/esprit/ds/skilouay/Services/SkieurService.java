@@ -75,7 +75,7 @@ public class SkieurService implements ISkieurService{
 
     @Override
     public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement) {
-        return skieurRepository.findByAbonnement_TypeAbon(typeAbonnement);
+        return skieurRepository.findByAbonnementTypeAbon(typeAbonnement);
     }
 
 }

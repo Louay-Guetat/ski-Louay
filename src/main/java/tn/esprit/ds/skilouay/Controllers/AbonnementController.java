@@ -3,9 +3,12 @@ package tn.esprit.ds.skilouay.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.ds.skilouay.Entities.Abonnement;
+import tn.esprit.ds.skilouay.Entities.TypeAbonnement;
 import tn.esprit.ds.skilouay.Services.IAbonnementService;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/abonnement")
@@ -31,5 +34,13 @@ public class AbonnementController {
     @DeleteMapping("/{id}")
     public void removeAbonnement (@PathVariable(name = "id") Long numAbonnement){
         abonnementService.removeAbonnement(numAbonnement);
+    }
+    @GetMapping("/{typeAbonnement}")
+    public Set<Abonnement> getSubscriptionByType(@PathVariable TypeAbonnement typeAbonnement){
+        return abonnementService.getSubscriptionByType(typeAbonnement);
+    }
+    @GetMapping()
+    public List<Abonnement> retreiveSubscriptionsByDates(@RequestBody LocalDate startDate, @RequestBody LocalDate endDate){
+        return abonnementService.retreiveSubscriptionsByDates(startDate,endDate);
     }
 }

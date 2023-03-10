@@ -3,6 +3,7 @@ package tn.esprit.ds.skilouay.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.ds.skilouay.Entities.Skieur;
+import tn.esprit.ds.skilouay.Entities.TypeAbonnement;
 import tn.esprit.ds.skilouay.Repositories.PisteRepository;
 import tn.esprit.ds.skilouay.Services.ISkieurService;
 
@@ -38,8 +39,12 @@ public class SkieurController {
         return skieurService.assignSkierToPiste(numSkieur,numPiste);
     }
 
-    @PutMapping("skiAbon/{numSkieur}/{numAbon}")
+    @PutMapping("/skiAbon/{numSkieur}/{numAbon}")
     public Skieur AssignSkierToSubscription(@PathVariable Long numSkieur,@PathVariable Long numAbon){
         return skieurService.AssignSkierToSubscription(numSkieur,numAbon);
+    }
+    @GetMapping("/typeAbon/{typeAbonnement}")
+    public List<Skieur> getSkieurByTypeAbon(@PathVariable TypeAbonnement typeAbonnement){
+        return skieurService.retrieveSkiersBySubscriptionType(typeAbonnement);
     }
 }

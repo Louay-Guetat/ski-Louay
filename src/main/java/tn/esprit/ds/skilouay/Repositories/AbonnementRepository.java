@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 
 public interface AbonnementRepository extends JpaRepository<Abonnement,Long> {
-    List<Abonnement> findByTypeAbonnement(TypeAbonnement typeAbonnement);
     Set<Abonnement> findByTypeAbonOrderByDateDebut(TypeAbonnement typeAbonnement);
-    List<Abonnement> findByDateDebutAndDateFin(LocalDate startDate, LocalDate endDate);
+    List<Abonnement> findByDateDebutAfterAndDateFinBefore(LocalDate startDate, LocalDate endDate);
 }

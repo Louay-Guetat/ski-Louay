@@ -45,6 +45,6 @@ public class AbonnementService implements IAbonnementService{
 
     @Override
     public List<Abonnement> retreiveSubscriptionsByDates(LocalDate startDate, LocalDate endDate) {
-        return abonnementRepository.findByDateDebutAndDateFin(startDate,endDate);
+        return abonnementRepository.findByDateDebutAfterAndDateFinBefore(startDate,endDate);
     }
 }
