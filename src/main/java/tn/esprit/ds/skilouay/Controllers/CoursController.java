@@ -1,34 +1,47 @@
-package tn.esprit.ds.skilouay.Controllers;
+package tn.esprit.ds.skilouay.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.ds.skilouay.Entities.Cours;
-import tn.esprit.ds.skilouay.Services.ICoursService;
+import tn.esprit.ds.skilouay.services.ICoursService;
 
 import java.util.List;
+import java.util.Optional;
+
 @RestController
-@RequestMapping("/cours")
+@RequestMapping("cours")
+
 public class CoursController {
+
     @Autowired
-    ICoursService coursService;
+    ICoursService iCoursService;
     @GetMapping
     public List<Cours> getAll(){
-        return coursService.retrieveAllCours();
+        return iCoursService.retrieveAllCours();
+
     }
-    @GetMapping("/{numCours}")
-    public Cours retrieveCours (@PathVariable Long numCours){
-        return coursService.retrieveCours(numCours);
+    @GetMapping("{numCours}")
+
+    public Optional<Cours> retrieveCours(@PathVariable Long numCours) {
+
+        return  iCoursService.retrieveCours(numCours);
+
     }
     @PostMapping
-    public Cours postCours(@RequestBody Cours cours){
-        return coursService.addCours(cours);
+
+    public Cours addCours(@RequestBody Cours cours){
+
+        return iCoursService.addCours(cours);
+    }
+    @DeleteMapping("{numCours}")
+    public void removeCours(@PathVariable Long numCours){
+
+        iCoursService.removeCours(numCours);
     }
     @PutMapping
-    public Cours updateCours(@RequestBody Cours cours){
-        return coursService.updateCours(cours);
-    }
-    @DeleteMapping("/{id}")
-    public void removeCours (@PathVariable(name = "id") Long numCours){
-        coursService.removeCours(numCours);
+    public Cours updateCours(@RequestBody Cours Cours) {
+
+        return  iCoursService.updateCours(Cours);
+
     }
 }

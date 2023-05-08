@@ -1,11 +1,8 @@
-package tn.esprit.ds.skilouay.Repositories;
+package tn.esprit.ds.skilouay.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import tn.esprit.ds.skilouay.Entities.Cours;
-import tn.esprit.ds.skilouay.Entities.Moniteur;
+import tn.esprit.ds.skilouay.Entities.Monitor;
 
-import java.util.List;
-
-public interface MoniteurRepository extends JpaRepository<Moniteur,Long> {
+public interface MoniteurRepository extends JpaRepository<Monitor,Long > {
 
 }

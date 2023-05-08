@@ -1,34 +1,47 @@
-package tn.esprit.ds.skilouay.Controllers;
+package tn.esprit.ds.skilouay.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.ds.skilouay.Entities.Inscription;
-import tn.esprit.ds.skilouay.Services.IInscriptionService;
+import tn.esprit.ds.skilouay.services.IInscriptionService;
 
 import java.util.List;
+import java.util.Optional;
 @RestController
-@RequestMapping("/inscription")
+@RequestMapping("inscription")
+
 public class InscriptionController {
+
     @Autowired
-    IInscriptionService inscriptionService;
+    IInscriptionService iInscriptionService;
     @GetMapping
     public List<Inscription> getAll(){
-        return inscriptionService.retrieveAllInscriptions();
+        return iInscriptionService.retrieveAllInscription();
+
     }
-    @GetMapping("/{numInscription}")
-    public Inscription retrieveInscription (@PathVariable Long numInscription){
-        return inscriptionService.retrieveInscription(numInscription);
+    @GetMapping("{numInscription}")
+
+    public Optional<Inscription> retrieveInscription(@PathVariable Long numInscription) {
+
+        return  iInscriptionService.retrieveInscription(numInscription);
+
     }
     @PostMapping
-    public Inscription postInscription(@RequestBody Inscription inscription){
-        return inscriptionService.addInscription(inscription);
+
+    public Inscription addInscription(@RequestBody Inscription inscription){
+
+        return iInscriptionService.addInscription(inscription);
     }
+    @DeleteMapping("{numInscription}")
+    public void removeInscription(@PathVariable Long numInscription){
+
+        iInscriptionService.removeInscription(numInscription);
+    }
+
     @PutMapping
-    public Inscription updateInscription(@RequestBody Inscription inscription){
-        return inscriptionService.updateInscription(inscription);
-    }
-    @DeleteMapping("/{id}")
-    public void removeInscription (@PathVariable(name = "id") Long numInscription){
-        inscriptionService.removeInscription(numInscription);
+    public Inscription updateInscription(@RequestBody Inscription inscription) {
+
+        return  iInscriptionService.updateInscription(inscription);
+
     }
 }

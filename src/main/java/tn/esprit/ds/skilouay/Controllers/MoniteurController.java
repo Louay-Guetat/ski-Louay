@@ -1,39 +1,47 @@
-package tn.esprit.ds.skilouay.Controllers;
+package tn.esprit.ds.skilouay.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.ds.skilouay.Entities.Moniteur;
-import tn.esprit.ds.skilouay.Entities.Skieur;
-import tn.esprit.ds.skilouay.Services.IMoniteurService;
+import tn.esprit.ds.skilouay.Entities.Monitor;
+import tn.esprit.ds.skilouay.services.IMoniteurService;
 
 import java.util.List;
+import java.util.Optional;
+
 @RestController
-@RequestMapping("/moniteur")
+@RequestMapping("moniteur")
+
 public class MoniteurController {
     @Autowired
-    IMoniteurService moniteurService;
+    IMoniteurService iMoniteurService;
     @GetMapping
-    public List<Moniteur> getAll(){
-        return moniteurService.retrieveAllMoniteurs();
+    public List<Monitor> getAll(){
+        return iMoniteurService.retrieveAllMoniteurs();
+
     }
-    @GetMapping("/{numMoniteur}")
-    public Moniteur retrieveMoniteur (@PathVariable Long numMoniteur){
-        return moniteurService.retrieveMoniteur(numMoniteur);
+    @GetMapping("{numMoniteur}")
+
+    public Optional<Monitor> retrieveMoniteur(@PathVariable Long numMoniteur) {
+
+        return  iMoniteurService.retrieveMoniteur(numMoniteur);
+
     }
     @PostMapping
-    public Moniteur postMoniteur(@RequestBody Moniteur moniteur){
-        return moniteurService.addMoniteur(moniteur);
+
+    public Monitor addMoniteur(@RequestBody Monitor moniteur){
+
+        return iMoniteurService.addMoniteur(moniteur);
     }
+    @DeleteMapping("{numMoniteur}")
+    public void removeMoniteur(@PathVariable Long numMoniteur){
+
+        iMoniteurService.removeMoniteur(numMoniteur);
+    }
+
     @PutMapping
-    public Moniteur updateMoniteur(@RequestBody Moniteur moniteur){
-        return moniteurService.updateMoniteur(moniteur);
-    }
-    @DeleteMapping("/{id}")
-    public void removeMoniteur (@PathVariable(name = "id") Long numMoniteur){
-        moniteurService.removeMoniteur(numMoniteur);
-    }
-    @PostMapping("/{numCours}")
-    public Moniteur addInstructorAndAssignToCourse(@RequestBody Moniteur moniteur, @PathVariable Long numCours){
-        return moniteurService.addInstructorAndAssignToCourse(moniteur,numCours);
+    public Monitor updateMoniteur(@RequestBody Monitor Moniteur) {
+
+        return  iMoniteurService.updateMoniteur(Moniteur);
+
     }
 }

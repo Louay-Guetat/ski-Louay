@@ -1,14 +1,18 @@
-package tn.esprit.ds.skilouay.Services;
+package tn.esprit.ds.skilouay.services;
 
-import tn.esprit.ds.skilouay.Entities.Moniteur;
+import tn.esprit.ds.skilouay.Entities.Monitor;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IMoniteurService {
-    List<Moniteur> retrieveAllMoniteurs();
-    Moniteur addMoniteur (Moniteur moniteur);
-    void removeMoniteur (Long numMoniteur);
-    Moniteur retrieveMoniteur (Long numMoniteur);
-    Moniteur updateMoniteur(Moniteur moniteur);
-    Moniteur addInstructorAndAssignToCourse(Moniteur moniteur, Long numCourse);
+
+
+    List<Monitor> retrieveAllMoniteurs();
+    Monitor addMoniteur(Monitor moniteur);
+    Monitor updateMoniteur (Monitor moniteur);
+    Optional<Monitor> retrieveMoniteur (Long numMoniteur);
+    void removeMoniteur  (Long numMoniteur);
+    Monitor addInstructorAndAssignToCourse(Monitor moniteur, Long numCourse);
+
 }

@@ -1,46 +1,46 @@
-package tn.esprit.ds.skilouay.Controllers;
+package tn.esprit.ds.skilouay.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.ds.skilouay.Entities.Abonnement;
-import tn.esprit.ds.skilouay.Entities.TypeAbonnement;
-import tn.esprit.ds.skilouay.Services.IAbonnementService;
+import tn.esprit.ds.skilouay.services.IAbonnementService;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
-
+import java.util.Optional;
 @RestController
-@RequestMapping("/abonnement")
+@RequestMapping("abonnement")
+
 public class AbonnementController {
     @Autowired
-    IAbonnementService abonnementService;
+    IAbonnementService iAbonnementService;
     @GetMapping
     public List<Abonnement> getAll(){
-        return abonnementService.retrieveAllAbonnements();
+        return iAbonnementService.retrieveAllAbonnement();
+
     }
-    @GetMapping("/{numAbonnement}")
-    public Abonnement retrieveAbonnement (@PathVariable Long numAbonnement){
-        return abonnementService.retrieveAbonnement(numAbonnement);
+    @GetMapping("{numAbon}")
+
+    public Optional<Abonnement> retrieveAbonnement(@PathVariable Long numAbon) {
+
+        return iAbonnementService.retrieveAbonnement(numAbon);
+
     }
     @PostMapping
-    public Abonnement postAbonnement(@RequestBody Abonnement abonnement){
-        return abonnementService.addAbonnement(abonnement);
+
+    public Abonnement addAbonnement(@RequestBody Abonnement abonnement){
+
+        return iAbonnementService.addAbonnement(abonnement);
     }
+    @DeleteMapping("{numAbon}")
+    public void removeAbonnement(@PathVariable Long numAbon){
+
+        iAbonnementService.removeAbonnement(numAbon);
+    }
+
     @PutMapping
-    public Abonnement updateAbonnement(@RequestBody Abonnement abonnement){
-        return abonnementService.updateAbonnement(abonnement);
-    }
-    @DeleteMapping("/{id}")
-    public void removeAbonnement (@PathVariable(name = "id") Long numAbonnement){
-        abonnementService.removeAbonnement(numAbonnement);
-    }
-    @GetMapping("/{typeAbonnement}")
-    public Set<Abonnement> getSubscriptionByType(@PathVariable TypeAbonnement typeAbonnement){
-        return abonnementService.getSubscriptionByType(typeAbonnement);
-    }
-    @GetMapping()
-    public List<Abonnement> retreiveSubscriptionsByDates(@RequestBody LocalDate startDate, @RequestBody LocalDate endDate){
-        return abonnementService.retreiveSubscriptionsByDates(startDate,endDate);
+    public Abonnement updateAbonnement(@RequestBody Abonnement abonnement) {
+
+        return  iAbonnementService.updateAbonnement(abonnement);
+
     }
 }

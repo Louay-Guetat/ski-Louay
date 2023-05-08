@@ -1,26 +1,26 @@
 package tn.esprit.ds.skilouay.Entities;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
-@javax.persistence.Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Inscription {
+@javax.persistence.Entity
+public class Monitor {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int numInscription;
-   private int numSemaine;
-   @ManyToOne
-   public Cours cours;
-   @JsonIgnore
-   @ManyToOne
-    public Skieur skieur;
+    private long numMonitor;
+    private String nomM;
+    private String prenomM;
+    private LocalDate dateRecru;
+
+    @OneToMany()
+    public List<Cours> cours;
 }

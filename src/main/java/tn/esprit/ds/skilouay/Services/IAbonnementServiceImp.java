@@ -1,21 +1,23 @@
-package tn.esprit.ds.skilouay.Services;
+package tn.esprit.ds.skilouay.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.ds.skilouay.Entities.Abonnement;
 import tn.esprit.ds.skilouay.Entities.TypeAbonnement;
-import tn.esprit.ds.skilouay.Repositories.AbonnementRepository;
+import tn.esprit.ds.skilouay.repositories.AbonnementRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class AbonnementService implements IAbonnementService{
+public class IAbonnementServiceImp implements IAbonnementService{
+
     @Autowired
     AbonnementRepository abonnementRepository;
     @Override
-    public List<Abonnement> retrieveAllAbonnements() {
+    public List<Abonnement> retrieveAllAbonnement() {
         return abonnementRepository.findAll();
     }
 
@@ -25,17 +27,18 @@ public class AbonnementService implements IAbonnementService{
     }
 
     @Override
-    public void removeAbonnement(Long numAbon) {
-        abonnementRepository.deleteById(numAbon);
+    public Abonnement updateAbonnement(Abonnement abonnement) {
+        return abonnementRepository.save(abonnement);
     }
 
     @Override
-    public Abonnement retrieveAbonnement(Long numAbon) {
-        return abonnementRepository.findById(numAbon).orElse(null);
+    public Optional<Abonnement> retrieveAbonnement(Long numAbon) {
+        return abonnementRepository.findById(numAbon);
     }
+
     @Override
-    public Abonnement updateAbonnement(Abonnement abonnement){
-        return abonnementRepository.save(abonnement);
+    public void removeAbonnement(Long numAbon) {
+        abonnementRepository.deleteById(numAbon);
     }
 
     @Override
@@ -44,7 +47,7 @@ public class AbonnementService implements IAbonnementService{
     }
 
     @Override
-    public List<Abonnement> retreiveSubscriptionsByDates(LocalDate startDate, LocalDate endDate) {
-        return abonnementRepository.findByDateDebutAfterAndDateFinBefore(startDate,endDate);
+    public List<Abonnement> findSubscriptionByDateDebutBetween(LocalDate startDate, LocalDate endDate) {
+        return abonnementRepository.findByDateDebutAfterAndDateFinBefore(startDate, endDate);
     }
 }

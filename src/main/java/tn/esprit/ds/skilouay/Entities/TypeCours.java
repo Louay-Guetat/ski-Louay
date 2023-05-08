@@ -1,5 +1,7 @@
 package tn.esprit.ds.skilouay.Entities;
 
 public enum TypeCours {
-    COLLECTIF_ENFANT,COLLECTIF_PARENT,PARTICULIER
+    COLLECTIF_ENFANT,
+    COLLECTIF8ADULTE,
+    PARTICULIER
 }

@@ -4,22 +4,23 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
-@Entity
+@javax.persistence.Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Abonnement {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long numAbon;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private long numAbon;
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private float prixAbon;
+
     private TypeAbonnement typeAbon;
+
+
 }
